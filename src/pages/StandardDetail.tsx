@@ -71,41 +71,41 @@ export default function StandardDetail() {
 
       {/* ── Header ─────────────────────── */}
       <header className="border-b border-rule bg-paper-warm">
-        <div className="container py-12">
-          <div className="grid lg:grid-cols-12 gap-8 items-end">
-            <div className="lg:col-span-8">
-              <div className="flex items-center gap-3 mb-4">
+        <div className="container py-8 md:py-12">
+          <div className="grid lg:grid-cols-12 gap-6 lg:gap-8 items-end">
+            <div className="lg:col-span-8 order-2 lg:order-1">
+              <div className="flex items-center gap-3 mb-4 flex-wrap">
                 <button
                   onClick={() => navigate(-1)}
                   className="inline-flex items-center gap-1.5 font-mono-tight text-[11px] uppercase tracking-wider2 text-rule/70 hover:text-copper"
                 >
                   <ArrowLeft className="h-3.5 w-3.5" /> Back
                 </button>
-                <span className="hairline flex-1 max-w-[200px]" />
+                <span className="hairline w-24 md:w-40" />
                 <span className="font-mono-tight text-[11px] uppercase tracking-wider2 text-rule/55">
                   Std-ID · {standard.id}
                 </span>
               </div>
 
-              <div className="flex items-center gap-3 mb-3">
+              <div className="flex items-center gap-3 mb-3 flex-wrap">
                 <span className="flex h-9 items-center border border-rule bg-ink px-3 font-mono-tight text-[13px] text-paper">
                   {prefixFromCode(standard.code)}
                 </span>
-                <h2 className="font-mono-tight text-[20px] text-rule/85">
+                <h2 className="font-mono-tight text-[16px] md:text-[20px] text-rule/85">
                   {standard.code}
                 </h2>
                 <StatusPill status={standard.status} />
               </div>
 
-              <h1 className="font-display text-[clamp(40px,5.5vw,72px)] font-700 leading-[0.96] tracking-tightest text-balance">
+              <h1 className="font-display text-[clamp(30px,5.5vw,72px)] font-700 leading-[1] tracking-tightest text-balance">
                 {standard.titleZh}
               </h1>
-              <p className="mt-3 font-display italic text-[clamp(15px,1.5vw,20px)] text-rule/65 leading-relaxed">
+              <p className="mt-3 font-display italic text-[clamp(14px,1.5vw,20px)] text-rule/65 leading-relaxed">
                 {standard.titleEn}
               </p>
             </div>
 
-            <div className="lg:col-span-4 space-y-3">
+            <div className="lg:col-span-4 space-y-3 order-1 lg:order-2">
               <div className="flex flex-wrap gap-2">
                 <button
                   onClick={() => toggleFavorite(standard.id)}
@@ -148,10 +148,10 @@ export default function StandardDetail() {
       </header>
 
       {/* ── Tabs + content ──────────────── */}
-      <section className="container py-10">
-        <div className="grid lg:grid-cols-12 gap-8">
-          <div className="lg:col-span-8">
-            <div className="flex gap-0 border-b border-rule overflow-x-auto">
+      <section className="container py-8 md:py-10">
+        <div className="grid lg:grid-cols-12 gap-6 lg:gap-8">
+          <div className="lg:col-span-8 lg:order-1 order-2">
+            <div className="flex gap-0 border-b border-rule overflow-x-auto -mx-4 px-4 md:mx-0 md:px-0">
               {(
                 [
                   { key: "scope", label: "适用范围", icon: ScrollText },
@@ -166,7 +166,7 @@ export default function StandardDetail() {
                   key={t.key}
                   onClick={() => setTab(t.key)}
                   className={cn(
-                    "group inline-flex items-center gap-2 border-b-2 px-4 py-3 font-mono-tight text-[11.5px] uppercase tracking-wider2 transition-all -mb-px",
+                    "group inline-flex shrink-0 items-center gap-1.5 md:gap-2 border-b-2 px-3 md:px-4 py-3 font-mono-tight text-[10.5px] md:text-[11.5px] uppercase tracking-wider2 transition-all -mb-px",
                     tab === t.key
                       ? "border-ink text-ink"
                       : "border-transparent text-rule/55 hover:text-rule",
@@ -279,8 +279,8 @@ export default function StandardDetail() {
           </div>
 
           {/* ── Side: notes & meta ──────────── */}
-          <aside className="lg:col-span-4">
-            <div className="sticky top-24 space-y-5">
+          <aside className="lg:col-span-4 lg:order-2 order-1">
+            <div className="lg:sticky lg:top-24 space-y-5">
               <div className="border border-rule bg-paper-cool p-5">
                 <div className="eyebrow mb-3">My note · 我的笔记</div>
                 <textarea

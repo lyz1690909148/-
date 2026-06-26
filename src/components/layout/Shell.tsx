@@ -1,5 +1,6 @@
+import { useState } from "react";
 import { Outlet, NavLink, Link } from "react-router-dom";
-import { Search, Bookmark, BookOpen, Info, Library } from "lucide-react";
+import { Search, Bookmark, BookOpen, Info, Library, Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const navItems = [
@@ -10,6 +11,8 @@ const navItems = [
 ];
 
 export default function Shell() {
+  const [menuOpen, setMenuOpen] = useState(false);
+
   return (
     <div className="min-h-screen flex flex-col">
       {/* ── Header ──────────────────────────────────── */}
@@ -24,7 +27,7 @@ export default function Shell() {
               <span className="font-display text-[20px] font-700 tracking-tight">
                 Standardum
               </span>
-              <span className="font-mono-tight text-[10px] uppercase tracking-wider2 text-rule/60">
+              <span className="font-mono-tight text-[10px] uppercase tracking-wider2 text-rule/60 hidden sm:inline">
                 试验标准档案库 · v0.1
               </span>
             </div>
@@ -36,6 +39,7 @@ export default function Shell() {
                 key={item.to}
                 to={item.to}
                 end={item.end}
+                onClick={() => setMenuOpen(false)}
                 className={({ isActive }) =>
                   cn(
                     "group flex items-center gap-2 px-3.5 py-2 font-mono-tight text-[11.5px] uppercase tracking-wider2 border border-transparent",
@@ -58,9 +62,44 @@ export default function Shell() {
               Last sync · 26.06.2026
             </span>
           </div>
+
+          {/* mobile hamburger */}
+          <button
+            className="md:hidden inline-flex h-10 w-10 items-center justify-center border border-rule"
+            onClick={() => setMenuOpen((s) => !s)}
+            aria-label="Toggle menu"
+          >
+            {menuOpen ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
+          </button>
         </div>
-        {/* mobile nav */}
-        <nav className="md:hidden flex overflow-x-auto border-t border-rule/30 px-2">
+
+        {/* mobile dropdown menu */}
+        {menuOpen && (
+          <div className="md:hidden border-t border-rule bg-paper-cool animate-rise">
+            <nav className="container py-2 flex flex-col">
+              {navItems.map((item) => (
+                <NavLink
+                  key={item.to}
+                  to={item.to}
+                  end={item.end}
+                  onClick={() => setMenuOpen(false)}
+                  className={({ isActive }) =>
+                    cn(
+                      "flex items-center gap-3 px-2 py-3 font-mono-tight text-[12px] uppercase tracking-wider2 border-b border-rule/15 last:border-b-0",
+                      isActive ? "text-copper" : "text-rule/80",
+                    )
+                  }
+                >
+                  <item.icon className="h-4 w-4" />
+                  {item.label}
+                </NavLink>
+              ))}
+            </nav>
+          </div>
+        )}
+
+        {/* tablet / small desktop nav (md) */}
+        <nav className="hidden sm:flex md:hidden overflow-x-auto border-t border-rule/30 px-3">
           {navItems.map((item) => (
             <NavLink
               key={item.to}
@@ -68,7 +107,7 @@ export default function Shell() {
               end={item.end}
               className={({ isActive }) =>
                 cn(
-                  "flex shrink-0 items-center gap-1.5 px-3 py-2 font-mono-tight text-[10.5px] uppercase tracking-wider2",
+                  "flex shrink-0 items-center gap-1.5 px-3 py-2 font-mono-tight text-[11px] uppercase tracking-wider2",
                   isActive ? "text-copper" : "text-rule/60",
                 )
               }
@@ -86,7 +125,7 @@ export default function Shell() {
 
       {/* ── Footer ──────────────────────────────────── */}
       <footer className="border-t border-rule bg-ink text-paper">
-        <div className="container py-8 grid gap-6 md:grid-cols-3 text-[12.5px]">
+        <div className="container py-8 grid gap-6 sm:grid-cols-2 md:grid-cols-3 text-[12.5px]">
           <div>
             <div className="flex items-center gap-2 mb-3">
               <BookOpen className="h-4 w-4" />
@@ -107,7 +146,7 @@ export default function Shell() {
               <li>环境与可靠性 / 化工</li>
             </ul>
           </div>
-          <div>
+          <div className="sm:col-span-2 md:col-span-1">
             <h4 className="font-mono-tight text-[10.5px] uppercase tracking-wider2 text-paper/50 mb-3">
               收录机构
             </h4>
@@ -119,8 +158,8 @@ export default function Shell() {
         </div>
         <div className="border-t border-paper/15">
           <div className="container py-4 flex flex-wrap items-center justify-between gap-2 font-mono-tight text-[10.5px] uppercase tracking-wider2 text-paper/50">
-            <span>© 2026 Standardum · Made for engineers</span>
-            <span>数据 · mock · for demo only</span>
+            <span>© 2026 Standardum</span>
+            <span>数据 · mock · demo only</span>
           </div>
         </div>
       </footer>

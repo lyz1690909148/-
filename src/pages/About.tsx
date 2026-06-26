@@ -3,19 +3,19 @@ import { ArrowUpRight, Library } from "lucide-react";
 
 export default function About() {
   return (
-    <div className="container py-14 max-w-4xl">
+    <div className="container py-10 md:py-14 max-w-4xl">
       <div className="section-eyebrow">
         <span>About</span>
         <span className="font-mono-tight text-rule/40">Manifesto</span>
       </div>
-      <h1 className="font-display text-[clamp(36px,5.5vw,72px)] font-700 leading-[0.95] tracking-tightest text-balance">
+      <h1 className="font-display text-[clamp(32px,6.5vw,72px)] font-700 leading-[0.95] tracking-tightest text-balance">
         关于
         <span className="italic text-copper">Standardum</span>
         <br />
         <span className="text-rule/55 text-[0.45em]">A small archive for big standards</span>
       </h1>
 
-      <div className="mt-10 grid md:grid-cols-2 gap-10">
+      <div className="mt-10 grid md:grid-cols-2 gap-8 md:gap-10">
         <div className="space-y-5 text-[15px] leading-[1.85] text-rule/85 font-display">
           <p>
             Standardum 是一座试验标准档案馆。
@@ -42,13 +42,13 @@ export default function About() {
         </div>
       </div>
 
-      <div className="mt-12 grid sm:grid-cols-3 gap-3">
+      <div className="mt-10 md:mt-12 grid grid-cols-1 sm:grid-cols-3 gap-3">
         <Kpi label="Records" value="64" suffix="standards" />
         <Kpi label="Issuers" value="10" suffix="GB / ISO / ASTM / IEC / JIS / DIN / BS / EN / NF / GJB" />
         <Kpi label="Categories" value="6" suffix="material · mech · env · ee · build · chem" />
       </div>
 
-      <div className="mt-12 border-t border-rule pt-8 flex flex-wrap items-center gap-3">
+      <div className="mt-10 md:mt-12 border-t border-rule pt-6 md:pt-8 flex flex-wrap items-center gap-3">
         <Link to="/search" className="btn-primary">
           <Library className="h-3.5 w-3.5" />
           开始检索

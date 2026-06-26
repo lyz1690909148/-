@@ -94,9 +94,9 @@ export default function Search() {
   const allStatuses = Object.keys(STATUS_LABELS) as StandardStatus[];
 
   return (
-    <div className="container py-10">
+    <div className="container py-8 md:py-10">
       {/* ── Search bar ──────────────────────── */}
-      <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
+      <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-6 md:mb-8">
         <div>
           <div className="section-eyebrow">
             <span>Search results</span>
@@ -104,7 +104,7 @@ export default function Search() {
               {results.length.toString().padStart(3, "0")} hits
             </span>
           </div>
-          <h1 className="font-display text-[clamp(36px,5vw,64px)] font-700 leading-[0.95] tracking-tightest">
+          <h1 className="font-display text-[clamp(32px,7vw,64px)] font-700 leading-[0.95] tracking-tightest">
             {q ? (
               <>
                 搜索
@@ -130,12 +130,12 @@ export default function Search() {
           onSubmit={(e) => e.preventDefault()}
           className="flex items-center gap-2 border border-rule bg-paper-cool px-3 py-2 md:w-[360px]"
         >
-          <SearchIcon className="h-4 w-4 text-rule/55" />
+          <SearchIcon className="h-4 w-4 text-rule/55 shrink-0" />
           <input
             defaultValue={q}
             onChange={(e) => setParam("q", e.target.value || null)}
             placeholder="编号 / 关键词"
-            className="flex-1 bg-transparent text-[14px] focus:outline-none placeholder:text-rule/40"
+            className="flex-1 min-w-0 bg-transparent text-[14px] focus:outline-none placeholder:text-rule/40"
           />
           {q && (
             <button
@@ -149,114 +149,117 @@ export default function Search() {
         </form>
       </div>
 
-      <div className="grid lg:grid-cols-12 gap-8">
+      <div className="grid lg:grid-cols-12 gap-6 md:gap-8">
         {/* ── Sidebar filters ─────────────── */}
-        {showFilter && (
-          <aside className="lg:col-span-3 animate-rise">
-            <div className="sticky top-24 space-y-6">
-              <FilterGroup title="Discipline">
-                <div className="grid grid-cols-1 gap-2">
-                  {(Object.keys(CATEGORY_LABELS) as Category[]).map((c) => (
-                    <button
-                      key={c}
-                      onClick={() =>
-                        setParam("category", cat === c ? null : c)
-                      }
-                      className={cn(
-                        "flex items-center justify-between border px-3 py-2 text-left text-[13px] transition-all",
-                        cat === c
-                          ? "border-ink bg-ink text-paper"
-                          : "border-rule/40 bg-paper-cool hover:border-rule",
-                      )}
-                    >
-                      <span>{CATEGORY_LABELS[c].zh}</span>
-                      <span className="font-mono-tight text-[10.5px] uppercase tracking-wider2 opacity-70">
-                        {c}
-                      </span>
-                    </button>
-                  ))}
-                </div>
-              </FilterGroup>
-
-              <FilterGroup title="Issuer">
-                <div className="space-y-1.5">
-                  {allIssuers.map((i) => (
-                    <label
-                      key={i}
-                      className="flex items-center gap-2.5 text-[13px] cursor-pointer hover:text-copper"
-                    >
-                      <input
-                        type="checkbox"
-                        checked={issuers.includes(i)}
-                        onChange={() => toggleListParam("issuer", i)}
-                        className="h-3.5 w-3.5 accent-copper"
-                      />
-                      <span className="font-mono-tight text-[12px] tracking-wider2">
-                        {i}
-                      </span>
-                      <span className="text-rule/60 truncate">
-                        {ISSUER_LABELS[i]}
-                      </span>
-                    </label>
-                  ))}
-                </div>
-              </FilterGroup>
-
-              <FilterGroup title="Status">
-                <div className="space-y-1.5">
-                  {allStatuses.map((st) => (
-                    <label
-                      key={st}
-                      className="flex items-center gap-2.5 text-[13px] cursor-pointer hover:text-copper"
-                    >
-                      <input
-                        type="checkbox"
-                        checked={statuses.includes(st)}
-                        onChange={() => toggleListParam("status", st)}
-                        className="h-3.5 w-3.5 accent-copper"
-                      />
-                      <span className={cn("pill", STATUS_LABELS[st].color)}>
-                        {STATUS_LABELS[st].zh}
-                      </span>
-                    </label>
-                  ))}
-                </div>
-              </FilterGroup>
-
-              <FilterGroup title="Year published">
-                <div className="flex items-center gap-2">
-                  <input
-                    type="number"
-                    value={yearFrom || ""}
-                    placeholder="From"
-                    onChange={(e) =>
-                      setParam("yf", e.target.value || null)
+        <aside
+          className={cn(
+            "lg:col-span-3 animate-rise",
+            !showFilter && "hidden lg:block",
+          )}
+        >
+          <div className="lg:sticky lg:top-24 space-y-6">
+            <FilterGroup title="Discipline">
+              <div className="grid grid-cols-2 lg:grid-cols-1 gap-2">
+                {(Object.keys(CATEGORY_LABELS) as Category[]).map((c) => (
+                  <button
+                    key={c}
+                    onClick={() =>
+                      setParam("category", cat === c ? null : c)
                     }
-                    className="w-1/2 border border-rule/50 bg-paper-cool px-2 py-1.5 text-[12.5px] font-mono-tight focus:outline-none focus:border-rule"
-                  />
-                  <span className="text-rule/40">—</span>
-                  <input
-                    type="number"
-                    value={yearTo || ""}
-                    placeholder="To"
-                    onChange={(e) =>
-                      setParam("yt", e.target.value || null)
-                    }
-                    className="w-1/2 border border-rule/50 bg-paper-cool px-2 py-1.5 text-[12.5px] font-mono-tight focus:outline-none focus:border-rule"
-                  />
-                </div>
-              </FilterGroup>
+                    className={cn(
+                      "flex items-center justify-between border px-3 py-2 text-left text-[13px] transition-all",
+                      cat === c
+                        ? "border-ink bg-ink text-paper"
+                        : "border-rule/40 bg-paper-cool hover:border-rule",
+                    )}
+                  >
+                    <span>{CATEGORY_LABELS[c].zh}</span>
+                    <span className="font-mono-tight text-[10.5px] uppercase tracking-wider2 opacity-70">
+                      {c}
+                    </span>
+                  </button>
+                ))}
+              </div>
+            </FilterGroup>
 
-              <button
-                onClick={clearAll}
-                className="w-full btn-ghost"
-                type="button"
-              >
-                <X className="h-3 w-3" /> 清除全部筛选
-              </button>
-            </div>
-          </aside>
-        )}
+            <FilterGroup title="Issuer">
+              <div className="grid grid-cols-2 lg:grid-cols-1 gap-1.5">
+                {allIssuers.map((i) => (
+                  <label
+                    key={i}
+                    className="flex items-center gap-2.5 text-[13px] cursor-pointer hover:text-copper"
+                  >
+                    <input
+                      type="checkbox"
+                      checked={issuers.includes(i)}
+                      onChange={() => toggleListParam("issuer", i)}
+                      className="h-3.5 w-3.5 accent-copper"
+                    />
+                    <span className="font-mono-tight text-[12px] tracking-wider2">
+                      {i}
+                    </span>
+                    <span className="text-rule/60 truncate">
+                      {ISSUER_LABELS[i]}
+                    </span>
+                  </label>
+                ))}
+              </div>
+            </FilterGroup>
+
+            <FilterGroup title="Status">
+              <div className="flex flex-wrap gap-1.5">
+                {allStatuses.map((st) => (
+                  <label
+                    key={st}
+                    className="flex items-center gap-2 text-[13px] cursor-pointer hover:text-copper"
+                  >
+                    <input
+                      type="checkbox"
+                      checked={statuses.includes(st)}
+                      onChange={() => toggleListParam("status", st)}
+                      className="h-3.5 w-3.5 accent-copper"
+                    />
+                    <span className={cn("pill", STATUS_LABELS[st].color)}>
+                      {STATUS_LABELS[st].zh}
+                    </span>
+                  </label>
+                ))}
+              </div>
+            </FilterGroup>
+
+            <FilterGroup title="Year published">
+              <div className="flex items-center gap-2">
+                <input
+                  type="number"
+                  value={yearFrom || ""}
+                  placeholder="From"
+                  onChange={(e) =>
+                    setParam("yf", e.target.value || null)
+                  }
+                  className="w-1/2 border border-rule/50 bg-paper-cool px-2 py-1.5 text-[12.5px] font-mono-tight focus:outline-none focus:border-rule"
+                />
+                <span className="text-rule/40">—</span>
+                <input
+                  type="number"
+                  value={yearTo || ""}
+                  placeholder="To"
+                  onChange={(e) =>
+                    setParam("yt", e.target.value || null)
+                  }
+                  className="w-1/2 border border-rule/50 bg-paper-cool px-2 py-1.5 text-[12.5px] font-mono-tight focus:outline-none focus:border-rule"
+                />
+              </div>
+            </FilterGroup>
+
+            <button
+              onClick={clearAll}
+              className="w-full btn-ghost"
+              type="button"
+            >
+              <X className="h-3 w-3" /> 清除全部筛选
+            </button>
+          </div>
+        </aside>
 
         {/* ── Result list ──────────────────── */}
         <section
@@ -303,9 +306,8 @@ export default function Search() {
           ) : (
             <div
               className={cn(
-                view === "grid"
-                  ? "grid sm:grid-cols-2 xl:grid-cols-3 gap-4"
-                  : "flex flex-col gap-3",
+                "grid grid-cols-1 sm:grid-cols-2 gap-4",
+                view === "list" && "sm:grid-cols-1",
               )}
             >
               {results.map((s, i) => (

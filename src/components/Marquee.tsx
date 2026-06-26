@@ -50,11 +50,11 @@ export function Stats() {
     <div className="border border-rule bg-paper-cool">
       <div className="grid grid-cols-2 md:grid-cols-5 divide-x divide-rule/30 border-b border-rule/30">
         {stats.map((s) => (
-          <div key={s.label} className="p-5">
+          <div key={s.label} className="p-4 md:p-5">
             <div className="font-mono-tight text-[10.5px] uppercase tracking-wider2 text-rule/55">
               {s.label}
             </div>
-            <div className="mt-2 font-display text-[34px] font-700 leading-none">
+            <div className="mt-2 font-display text-[26px] md:text-[34px] font-700 leading-none">
               {s.value}
             </div>
           </div>
@@ -68,13 +68,13 @@ export function Stats() {
             key={k}
             className="p-3 flex flex-col items-start gap-0.5"
           >
-            <span className="font-mono-tight text-[10px] uppercase tracking-wider2 text-rule/50">
+            <span className="font-mono-tight text-[9.5px] md:text-[10px] uppercase tracking-wider2 text-rule/50">
               {CATEGORY_LABELS[k].en}
             </span>
-            <span className="font-display text-[18px] font-600">
+            <span className="font-display text-[16px] md:text-[18px] font-600">
               {STANDARDS_BY_CATEGORY[k].length}
             </span>
-            <span className="text-[11px] text-rule/65">
+            <span className="text-[10.5px] md:text-[11px] text-rule/65">
               {CATEGORY_LABELS[k].zh}
             </span>
           </div>

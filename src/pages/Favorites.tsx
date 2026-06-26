@@ -19,15 +19,15 @@ export default function Favorites() {
     .filter((x): x is { fav: typeof favorites[0]; standard: NonNullable<typeof x.standard> } => Boolean(x.standard));
 
   return (
-    <div className="container py-12">
+    <div className="container py-8 md:py-12">
       <div className="section-eyebrow">
         <span>Bookmarks</span>
         <span className="font-mono-tight text-rule/40">
           {items.length.toString().padStart(3, "0")} saved
         </span>
       </div>
-      <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
-        <h1 className="font-display text-[clamp(36px,5vw,64px)] font-700 leading-[0.95] tracking-tightest">
+      <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-6 md:mb-8">
+        <h1 className="font-display text-[clamp(32px,7vw,64px)] font-700 leading-[0.95] tracking-tightest">
           收藏<span className="italic text-copper">.</span>
           <br />
           <span className="text-rule/55 text-[0.55em]">your private archive</span>
@@ -59,8 +59,8 @@ export default function Favorites() {
                 `stagger-${Math.min(i + 1, 6)}`,
               )}
             >
-              <div className="grid lg:grid-cols-12 gap-5 p-5">
-                <div className="lg:col-span-3 border-r border-rule/15 pr-5">
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 lg:gap-5 p-4 md:p-5">
+                <div className="lg:col-span-3 lg:border-r lg:border-rule/15 lg:pr-5">
                   <div className="font-mono-tight text-[12px] tracking-wider2 text-rule/70">
                     {s.code}
                   </div>
@@ -79,7 +79,7 @@ export default function Favorites() {
                     to={`/standard/${s.id}`}
                     className="block hover:text-copper"
                   >
-                    <h3 className="font-display text-[20px] font-600 leading-snug">
+                    <h3 className="font-display text-[18px] md:text-[20px] font-600 leading-snug">
                       {s.titleZh}
                     </h3>
                     <p className="mt-1 text-[12.5px] italic text-rule/60 line-clamp-1">

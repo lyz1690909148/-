@@ -47,25 +47,25 @@ export default function Home() {
 
       {/* ── Hero ─────────────────────────────── */}
       <section className="border-b border-rule">
-        <div className="container py-14 md:py-20">
+        <div className="container py-10 md:py-20">
           <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-end">
             <div className="lg:col-span-7">
               <div className="flex items-center gap-3 mb-6 animate-rise">
                 <span className="flex h-6 items-center gap-1.5 border border-rule/60 px-2 font-mono-tight text-[10.5px] uppercase tracking-wider2 text-rule/70">
                   <Sparkles className="h-3 w-3" />
-                  New · 64 records indexed
+                  New · 64 records
                 </span>
                 <span className="hairline flex-1" />
-                <span className="font-mono-tight text-[10.5px] uppercase tracking-wider2 text-rule/55">
+                <span className="font-mono-tight text-[10.5px] uppercase tracking-wider2 text-rule/55 hidden sm:inline">
                   Issue 24 / 26.06.2026
                 </span>
               </div>
-              <h1 className="font-display text-[clamp(48px,8vw,108px)] font-700 leading-[0.92] tracking-tightest text-balance animate-rise stagger-1">
+              <h1 className="font-display text-[clamp(40px,9vw,108px)] font-700 leading-[0.95] tracking-tightest text-balance animate-rise stagger-1">
                 Standards,
                 <br />
                 <span className="italic text-copper">indexed.</span>
               </h1>
-              <p className="mt-6 max-w-xl text-[16px] leading-relaxed text-rule/75 animate-rise stagger-2">
+              <p className="mt-6 max-w-xl text-[15px] md:text-[16px] leading-relaxed text-rule/75 animate-rise stagger-2">
                 一座为工程师与检测人搭建的试验标准档案库。
                 在这里，<span className="font-display italic">{`{GB / ISO / ASTM / IEC / GJB}`}</span> {" "}
                 不再是散落在桌面上的 PDF，而是可即时检索、可对比、可收藏的活档案。
@@ -76,23 +76,23 @@ export default function Home() {
                   e.preventDefault();
                   submit();
                 }}
-                className="mt-9 flex items-center gap-3 border-b-2 border-rule pb-2 animate-rise stagger-3"
+                className="mt-7 md:mt-9 flex items-center gap-2 md:gap-3 border-b-2 border-rule pb-2 animate-rise stagger-3"
               >
-                <Search className="h-6 w-6 text-rule/55 shrink-0" strokeWidth={1.6} />
-                <span className="font-mono-tight text-[14px] text-rule/45 shrink-0 select-none">
+                <Search className="h-5 w-5 md:h-6 md:w-6 text-rule/55 shrink-0" strokeWidth={1.6} />
+                <span className="font-mono-tight text-[12px] md:text-[14px] text-rule/45 shrink-0 select-none">
                   query&gt;
                 </span>
                 <input
                   value={q}
                   onChange={(e) => setQ(e.target.value)}
-                  placeholder="输入标准编号 / 关键词 / ISO 6892 / 冲击 / 硬度……"
-                  className="input-search"
+                  placeholder="编号 / 关键词……"
+                  className="input-search !text-lg md:!text-2xl min-w-0 flex-1"
                 />
                 <button
                   type="submit"
-                  className="ml-auto inline-flex items-center gap-1.5 rounded-sm border border-rule bg-ink px-3 py-1.5 font-mono-tight text-[11px] uppercase tracking-wider2 text-paper hover:bg-copper"
+                  className="ml-auto inline-flex shrink-0 items-center gap-1.5 rounded-sm border border-rule bg-ink px-3 py-1.5 font-mono-tight text-[11px] uppercase tracking-wider2 text-paper hover:bg-copper"
                 >
-                  Search
+                  <span className="hidden sm:inline">Search</span>
                   <ArrowRight className="h-3 w-3" />
                 </button>
               </form>
@@ -112,20 +112,20 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="lg:col-span-5 animate-rise stagger-3">
+            <div className="lg:col-span-5 animate-rise stagger-3 order-first lg:order-last">
               <Stats />
             </div>
           </div>
 
           {/* ── Categories ─────────────────── */}
-          <div className="mt-12">
+          <div className="mt-10 md:mt-12">
             <div className="section-eyebrow">
               <span>Browse by discipline</span>
               <span className="ml-2 font-mono-tight text-rule/40">
                 0{Object.keys(CATEGORY_LABELS).length}
               </span>
             </div>
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
               {categories.map((c) => (
                 <CategoryChip
                   key={c}
@@ -142,15 +142,15 @@ export default function Home() {
       </section>
 
       {/* ── Recent / Featured ───────────────────── */}
-      <section className="container py-14">
+      <section className="container py-12 md:py-14">
         <div className="grid lg:grid-cols-12 gap-8">
-          <div className="lg:col-span-4">
-            <div className="sticky top-24 space-y-5">
+          <div className="lg:col-span-4 order-2 lg:order-1">
+            <div className="lg:sticky lg:top-24 space-y-5">
               <div>
                 <div className="section-eyebrow">
                   <span>Editor's pick</span>
                 </div>
-                <h2 className="font-display text-[40px] font-700 leading-tight">
+                <h2 className="font-display text-[32px] md:text-[40px] font-700 leading-tight">
                   本月新发布与
                   <br />
                   <span className="italic text-copper">推荐阅读</span>
@@ -184,8 +184,8 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="lg:col-span-8">
-            <div className="grid sm:grid-cols-2 gap-4">
+          <div className="lg:col-span-8 order-1 lg:order-2">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {featured.map((s, i) => (
                 <StandardCard key={s.id} standard={s} index={i} />
               ))}

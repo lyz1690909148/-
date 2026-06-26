@@ -60,11 +60,11 @@ export function StandardCard({
         </p>
       )}
 
-      <div className="mt-auto pt-3 flex items-center justify-between gap-3 border-t border-rule/15 font-mono-tight text-[10.5px] uppercase tracking-wider2 text-rule/60">
+      <div className="mt-auto pt-3 flex flex-wrap items-center gap-x-2 gap-y-1 border-t border-rule/15 font-mono-tight text-[10.5px] uppercase tracking-wider2 text-rule/60">
         <span>发布 {formatDate(s.publishDate)}</span>
-        <span>·</span>
+        <span className="hidden sm:inline">·</span>
         <span>实施 {formatDate(s.effectiveDate)}</span>
-        <span>·</span>
+        <span className="hidden sm:inline">·</span>
         <span>{s.issuerName.split(" ")[0]}</span>
       </div>
     </Link>
